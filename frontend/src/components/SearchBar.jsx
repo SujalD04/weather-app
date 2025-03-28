@@ -50,6 +50,7 @@ export default function SearchBar({ setWeather }) {
     } catch (error) {
       console.error("Error fetching weather", error);
       alert("City not found or API issue");
+      res.status(500).json({ error: error.message || "Internal server error" });
     }
   };
 
