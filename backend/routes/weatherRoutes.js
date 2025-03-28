@@ -9,7 +9,7 @@ dotenv.config();
 const router = express.Router();
 
 // Fetch weather data from OpenWeather API
-router.get("/weather/:city", async (req, res) => {
+router.get("/weather/city", async (req, res) => {
   const { city } = req.params;
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
