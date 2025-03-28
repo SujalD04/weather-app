@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Allowed CORS origins
-const allowedOrigins = [ "http://localhost:5173", "https://somedomain.com" ];
+const allowedOrigins = [ "http://localhost:5173", "https://weather-app-alpha-three-60.vercel.app/" ];
 
 app.use(cors({ 
     origin: (origin, callback) => {

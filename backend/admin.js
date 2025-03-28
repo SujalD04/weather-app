@@ -6,9 +6,11 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
+const jwtSecret = process.env.JWT_SECRET_KEY;
+
 const generateJWT = (user) => {
   // You can customize the JWT payload as needed
-  return jwt.sign({ uid: user.uid }, 'YOUR_SECRET_KEY', { expiresIn: '1h' });
+  return jwt.sign({ uid: user.uid }, jwtSecret, { expiresIn: '1h' });
 };
 
 // Endpoint to handle sign-up

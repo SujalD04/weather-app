@@ -10,6 +10,7 @@ export default function Home() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const apiKey = process.env.VITE_OPENWEATHER_API_KEY;
   
   const fetchLocationWeather = async () => {
     if (!navigator.geolocation) {
@@ -24,7 +25,7 @@ export default function Home() {
       const { latitude, longitude } = position.coords;
       try {
         const res = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=YOUR_API_KEY&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
         );
         setWeather(res.data);
       } catch (err) {
