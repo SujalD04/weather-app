@@ -2,6 +2,7 @@ import express from "express";
 import axios from "axios";
 import History from "../models/History.js";
 import dotenv from "dotenv";
+import { encode } from "querystring"; // To handle URL encoding
 
 dotenv.config();
 
@@ -12,9 +13,16 @@ router.get("/weather/:city", async (req, res) => {
   const { city } = req.params;
   const API_KEY = process.env.OPENWEATHER_API_KEY;
 
+  if (!city) {
+    return res.status(400).json({ error: "City name is required" });
+  }
+
   try {
+    // Ensure the city name is properly encoded
+    const encodedCity = encode(city);
+    
     const response = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodedCity}&appid=${API_KEY}&units=metric`
     );
 
     const data = response.data;
@@ -42,7 +50,7 @@ router.get("/weather/:city", async (req, res) => {
 
     res.json(weatherData);
   } catch (error) {
-    console.error("Error fetching weather data:", error.message);
+    console.error("Error fetching weather data:", error.response ? error.response.data : error.message);
     res.status(500).json({ error: "Failed to fetch weather data" });
   }
 });
@@ -60,14 +68,13 @@ router.get("/history", async (req, res) => {
 
 // Clear search history
 router.delete("/history", async (req, res) => {
-    try {
-      await History.deleteMany({}); // Deletes all history records
-      res.status(200).json({ message: "Search history cleared successfully" });
-    } catch (error) {
-      console.error("Error clearing history:", error.message);
-      res.status(500).json({ error: "Failed to clear history" });
-    }
-  });
-  
+  try {
+    await History.deleteMany({}); // Deletes all history records
+    res.status(200).json({ message: "Search history cleared successfully" });
+  } catch (error) {
+    console.error("Error clearing history:", error.message);
+    res.status(500).json({ error: "Failed to clear history" });
+  }
+});
 
 export default router;
