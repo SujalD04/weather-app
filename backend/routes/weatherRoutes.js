@@ -58,4 +58,16 @@ router.get("/history", async (req, res) => {
   }
 });
 
+// Clear search history
+router.delete("/history", async (req, res) => {
+    try {
+      await History.deleteMany({}); // Deletes all history records
+      res.status(200).json({ message: "Search history cleared successfully" });
+    } catch (error) {
+      console.error("Error clearing history:", error.message);
+      res.status(500).json({ error: "Failed to clear history" });
+    }
+  });
+  
+
 export default router;
