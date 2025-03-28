@@ -45,7 +45,7 @@ export default function SearchBar({ setWeather }) {
   const fetchWeather = async (cityName) => {
     if (!cityName) return;
     try {
-      const res = await axios.get(`https://weather-app-alpha-three-60.vercel.app/api/weather/${cityName}`);
+      const res = await axios.get(`https://weather-app-p1y5.onrender.com/api/weather/${cityName}`);
       setWeather(res.data);
     } catch (error) {
       console.error("Error fetching weather", error);

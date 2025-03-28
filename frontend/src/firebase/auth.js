@@ -31,6 +31,6 @@ export const doPasswordUpdate = (password) => {
 
 export const doSendEmailVerification = () => {
     return sendEmailVerification(auth.currentUser, {
-        url: 'https://weather-app-alpha-three-60.vercel.app/'
+        url: 'https://weather-app-p1y5.onrender.com/'
     });
 };

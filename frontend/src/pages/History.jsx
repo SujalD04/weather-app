@@ -12,7 +12,7 @@ export default function History() {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("https://weather-app-alpha-three-60.vercel.app/api/history");
+      const res = await axios.get("https://weather-app-p1y5.onrender.com/api/history");
       setHistory(res.data);
     } catch (error) {
       console.error("Failed to fetch history");
@@ -21,7 +21,7 @@ export default function History() {
 
   const clearHistory = async () => {
     try {
-      await axios.delete("https://weather-app-alpha-three-60.vercel.app/api/history");
+      await axios.delete("https://weather-app-p1y5.onrender.com/api/history");
       fetchHistory(); // Fetch updated history after clearing
     } catch (error) {
       console.error("Failed to clear history", error);
