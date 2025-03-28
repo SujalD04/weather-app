@@ -29,7 +29,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => res.send("Weather API is running"));
 
-
 // Routes
 app.use("/api", weatherRoutes);
 
