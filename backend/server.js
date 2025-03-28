@@ -2,25 +2,36 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
+import weatherRoutes from "./routes/weatherRoutes.js";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors({ 
-    origin: ["http://localhost:5173", "https://somedomain.com"], 
-    methods: ["GET", "POST"], 
-    allowedHeaders: ["Content-Type"],
-    credentials: true 
-}));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // Optional for handling form data
+// Allowed CORS origins
+const allowedOrigins = [ "http://localhost:5173", "https://somedomain.com" ];
 
-// Define basic route before DB connection
-app.get("/", (req, res) => {
-    res.send("🚀 Server running on port 5000");
-});
+app.use(cors({ 
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => res.send("Weather API is running"));
+
+
+// Routes
+app.use("/api", weatherRoutes);
 
 // Connect to DB and Start Server
 const startServer = async () => {
