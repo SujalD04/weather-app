@@ -20,7 +20,7 @@ export default function SearchBar({ setWeather }) {
     const fetchSuggestions = async () => {
       setLoading(true); 
       try {
-        const res = await axios.get("http://api.openweathermap.org/data/2.5/find", {
+        const res = await axios.get("https://api.openweathermap.org/data/2.5/find", {
           params: {
             q: city,
             type: "like",
