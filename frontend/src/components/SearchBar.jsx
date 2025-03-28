@@ -1,17 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 export default function SearchBar({ setWeather }) {
   const [city, setCity] = useState("");
 
-  useEffect(() => {
-    const lastCity = localStorage.getItem("lastCity");
-    if (lastCity) fetchWeather(lastCity);
-  }, []);
-
   const fetchWeather = async (city) => {
     if (!city) return;
-    localStorage.setItem("lastCity", city);
     try {
       const res = await axios.get(`http://localhost:5000/api/weather/${city}`);
       setWeather(res.data);
@@ -27,7 +21,7 @@ export default function SearchBar({ setWeather }) {
         placeholder="Enter city..."
         value={city}
         onChange={(e) => setCity(e.target.value)}
-        className="p-2 rounded border"
+        className="p-2 rounded border text-black"
       />
       <button
         onClick={() => fetchWeather(city)}
