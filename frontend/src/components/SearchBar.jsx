@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function SearchBar({ setWeather }) {
   const [city, setCity] = useState("");
@@ -8,15 +9,14 @@ export default function SearchBar({ setWeather }) {
     if (lastCity) fetchWeather(lastCity);
   }, []);
 
-  const fetchWeather = async (cityName) => {
-    if (!cityName) return; // Prevent empty search
-    localStorage.setItem("lastCity", cityName);
+  const fetchWeather = async (city) => {
+    if (!city) return;
+    localStorage.setItem("lastCity", city);
     try {
-      const res = await fetch(`http://localhost:5000/api/weather/${cityName}`);
-      const data = await res.json();
-      setWeather(data);
-    } catch (error) {
-      console.error("Failed to fetch weather:", error);
+      const res = await axios.get(`http://localhost:5000/api/weather/${city}`);
+      setWeather(res.data);
+    } catch {
+      alert("City not found or API issue");
     }
   };
 

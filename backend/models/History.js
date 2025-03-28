@@ -1,14 +1,25 @@
 import mongoose from "mongoose";
 
-const historySchema = new mongoose.Schema(
+const HistorySchema = new mongoose.Schema(
   {
-    city: { type: String, required: true },
-    temperature: { type: Number, required: true },
-    humidity: { type: Number, required: true },
-    condition: { type: String, required: true },
+    city: String,
+    country: String,
+    temperature: Number,
+    feels_like: Number,
+    humidity: Number,
+    pressure: Number,
+    wind_speed: Number,
+    wind_direction: Number,
+    cloudiness: Number,
+    sunrise: String,
+    sunset: String,
+    weather_condition: String,
+    weather_icon: String,
+    rain_1h: Number,
+    snow_1h: Number,
   },
   { timestamps: true }
 );
 
-const History = mongoose.model("history", historySchema);
+const History = mongoose.model("History", HistorySchema);
 export default History;
