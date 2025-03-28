@@ -30,6 +30,8 @@ export default function Navbar() {
         <NavItem to="/dashboard">Dashboard</NavItem>
         <NavItem to="/about">About</NavItem>
         <NavItem to="/history">History</NavItem>
+        <NavItem to="/signin">Sign In</NavItem> {/* Sign In Link */}
+        <NavItem to="/signup">Sign Up</NavItem> {/* Sign Up Link */}
       </ul>
 
       {/* Right - Theme Toggle & Mobile Menu */}
@@ -84,6 +86,8 @@ export default function Navbar() {
             <NavItem to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</NavItem>
             <NavItem to="/about" onClick={() => setMenuOpen(false)}>About</NavItem>
             <NavItem to="/history" onClick={() => setMenuOpen(false)}>History</NavItem>
+            <NavItem to="/signin" onClick={() => setMenuOpen(false)}>Sign In</NavItem> {/* Sign In Link */}
+            <NavItem to="/signup" onClick={() => setMenuOpen(false)}>Sign Up</NavItem> {/* Sign Up Link */}
           </motion.ul>
         )}
       </AnimatePresence>
